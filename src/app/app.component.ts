@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UnsplashImageService } from './services/getData/unsplash-image.service';
+import { UnsplashImages } from './model/unsplashImages';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
 
   constructor(private imageService: UnsplashImageService) {}
   async ngOnInit(): Promise<void> {
-    this.imageService.getData().subscribe((data) => {
+    this.imageService.getData().subscribe((data: any) => {
+      console.log('Datos', data);
       this.data = data;
       this.columns = this.splitArray(data, this.columnNumber);
     });
@@ -22,7 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   async getMoreData(): Promise<void> {
-    this.imageService.getMoreData().subscribe((data) => {
+    this.imageService.getMoreData().subscribe((data: any) => {
       const temp = [...data, ...this.data];
       this.data = temp;
       this.columns = this.splitArray(temp, this.columnNumber);
