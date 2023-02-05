@@ -1,9 +1,5 @@
-<button class="button" (click)="getMoreData()">Cargar mas imagenes</button>
-
-<div class="grid-container">
-  <div *ngFor="let array of columns" class="col">
-    <app-image-card [array]="array"></app-image-card>
-  </div>
+<div class="container">
+  <button class="button" (click)="getMoreData()">Cargar mas imagenes</button>
+  <app-columns class="grid-container" [columns]="columns"></app-columns>
+  <app-up-button></app-up-button>
 </div>
-
-<app-up-button></app-up-button>

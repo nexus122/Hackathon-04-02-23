@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UnsplashImageService {
   constructor() {}
-  page: number = 3;
+  page: number = 1;
   per_page: number = 20;
-  url: string = `https://api.unsplash.com/photos?page=${this.page}&per_page=${this.per_page}`;
-  key: string = '&client_id=Glp-ZIa3fu4pttQdGXSa-NuBZy9mnRIS89zo6ypqvRQ';
 
   getData(): Observable<any> {
     return new Observable((observer) => {
-      fetch(this.url + this.key)
+      const conditions: string = `?page=${this.page}&per_page=${this.per_page}&client_id=${environment.apiToken}`;
+      fetch(environment.apiUrl + conditions)
         .then((response) => response.json())
         .then((data) => {
           observer.next(data);
@@ -23,9 +23,9 @@ export class UnsplashImageService {
 
   getMoreData(): Observable<any> {
     this.page++;
-    this.url = `https://api.unsplash.com/photos?page=${this.page}&per_page=${this.per_page}`;
+    const conditions: string = `?page=${this.page}&per_page=${this.per_page}&client_id=${environment.apiToken}`;
     return new Observable((observer) => {
-      fetch(this.url + this.key)
+      fetch(environment.apiUrl + conditions)
         .then((response) => response.json())
         .then((data) => {
           observer.next(data);

@@ -1,0 +1,21 @@
+.col {
+    width: 99%;
+  }
+  
+  @media (min-width: 425px) {
+    .col {
+      width: 98%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .col {
+      width: 48%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .col {
+      width: 32%;
+    }
+  }
