@@ -1,0 +1,7 @@
+<div class="grid-item" *ngFor="let item of array">
+  <img [src]="item['urls']['regular']" [alt]="item['user']['name']" />
+  <div class="description">
+    <h1>{{ item["user"]["name"] }}</h1>
+    <p>{{ item["user"]["bio"] }}</p>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+.grid-item {
+    position: relative;
+    border-radius: 1em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;    
+    color:white;
+
+    background-size: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 1em;
+  }
+
+  .description{
+    padding: 1em;
+    width: 100%;
+    background-image: linear-gradient(transparent, black);        
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+  }

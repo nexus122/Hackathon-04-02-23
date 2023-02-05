@@ -1,0 +1,47 @@
+.grid-container {  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+  }
+
+  
+
+  .col {
+    width: 99%;
+  }
+  
+  @media (min-width: 425px) {
+    .col {
+      width: 98%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .col {
+      width: 48%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .col {
+      width: 32%;
+    }
+  }
+
+
+  
+  .button {
+    background-color: white;
+    border: 2px solid black;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 1em;
+  }
+  .button:hover{
+    background-color: black;
+    color: white;
+  }
