@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor(private imageService: UnsplashImageService) {}
   async ngOnInit(): Promise<void> {
-    this.imageService.getData().subscribe((data: any) => {
+    this.imageService.getData().subscribe((data: Array<UnsplashImages>) => {
       console.log('Datos', data);
       this.data = data;
       this.columns = this.splitArray(data, this.columnNumber);
@@ -24,14 +24,14 @@ export class AppComponent implements OnInit {
   }
 
   async getMoreData(): Promise<void> {
-    this.imageService.getMoreData().subscribe((data: any) => {
+    this.imageService.getMoreData().subscribe((data: Array<UnsplashImages>) => {
       const temp = [...data, ...this.data];
       this.data = temp;
       this.columns = this.splitArray(temp, this.columnNumber);
     });
   }
 
-  splitArray(originalArray: Array<any>, parts: number) {
+  splitArray(originalArray: Array<UnsplashImages>, parts: number) {
     const chunkLength = Math.floor(originalArray.length / parts);
     const arrays = [];
 

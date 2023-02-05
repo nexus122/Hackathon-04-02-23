@@ -11,7 +11,7 @@ export class UnsplashImageService {
   page: number = 1;
   per_page: number = 20;
 
-  getData(): Observable<UnsplashImages> {
+  getData(): Observable<Array<UnsplashImages>> {
     return new Observable((observer) => {
       const conditions: string = `?page=${this.page}&per_page=${this.per_page}&client_id=${environment.apiToken}`;
       fetch(environment.apiUrl + conditions)
@@ -32,7 +32,7 @@ export class UnsplashImageService {
     );
   }
 
-  getMoreData(): Observable<UnsplashImages> {
+  getMoreData(): Observable<Array<UnsplashImages>> {
     this.page++;
     const conditions: string = `?page=${this.page}&per_page=${this.per_page}&client_id=${environment.apiToken}`;
     return new Observable((observer) => {
