@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   async getMoreData(): Promise<void> {
     this.imageService.getMoreData().subscribe((data) => {
-      let temp = [...data, ...this.data];
+      const temp = [...data, ...this.data];
       this.data = temp;
       this.columns = this.splitArray(temp, this.columnNumber);
     });
