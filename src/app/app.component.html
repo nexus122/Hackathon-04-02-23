@@ -1,4 +1,5 @@
 <div class="container">
+  <p *ngIf="loading$ | async">Cargando ...</p>
   <button class="button" (click)="getMoreData()">Cargar mas imagenes</button>
   <app-columns class="grid-container" [columns]="columns"></app-columns>
   <app-up-button></app-up-button>

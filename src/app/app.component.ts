@@ -1,33 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { UnsplashImageService } from './services/getData/unsplash-image.service';
 import { UnsplashImages } from './model/unsplashImages';
+import { Store } from '@ngrx/store';
+import { loadItems, loadedItems } from './state/actions/items.actions';
+import { Observable, toArray } from 'rxjs';
+import { selectLoading } from './state/selectors/items.selectors';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'Hackathon-04-02-23';
-  data: Array<any> = [];
+  data$: Observable<Array<UnsplashImages>> = new Observable();
   columns: Array<any> = [];
-  columnNumber: number = 3;
+  columnNumber!: number;
 
-  constructor(private imageService: UnsplashImageService) {}
+  // Generamos un observable para el estado de loading
+  loading$: Observable<boolean> = new Observable(); // Obtenemos el estado de loading
+
+  constructor(
+    private imageService: UnsplashImageService,
+    private store: Store<any>
+  ) {}
   async ngOnInit(): Promise<void> {
+    this.store.dispatch(loadItems()); // Establecemos el loader en true porque estamos cargando datos
+    this.loading$ = this.store.select(selectLoading); // Obtenemos el estado de loading
+    this.data$ = this.store.select((state) => state.items.items); // Obtenemos los items de la store
+    this.getData(); // Obtenemos los datos
+    this.getColumnNumber(); // Calculamos el tamaño de la ventana
+
+    // Siempre que se haga un 'resize' se ajusta el numero de columnas
+    window.addEventListener('resize', this.getColumnNumber.bind(this));
+  }
+
+  async getData(): Promise<void> {
     this.imageService.getData().subscribe((data: Array<UnsplashImages>) => {
-      console.log('Datos', data);
-      this.data = data;
-      this.columns = this.splitArray(data, this.columnNumber);
+      this.store.dispatch(loadedItems({ items: data })); // Guardamos los items en el store
     });
-    this.windowSize();
-    window.addEventListener('resize', this.windowSize.bind(this));
   }
 
   async getMoreData(): Promise<void> {
     this.imageService.getMoreData().subscribe((data: Array<UnsplashImages>) => {
-      const temp = [...data, ...this.data];
-      this.data = temp;
-      this.columns = this.splitArray(temp, this.columnNumber);
+      this.store.dispatch(loadedItems({ items: data })); // Guardamos los items en el store
     });
   }
 
@@ -43,7 +58,7 @@ export class AppComponent implements OnInit {
     return arrays;
   }
 
-  windowSize() {
+  getColumnNumber() {
     if (window.innerWidth <= 425) {
       this.columnNumber = 1;
     } else if (window.innerWidth <= 768) {
@@ -52,6 +67,8 @@ export class AppComponent implements OnInit {
       this.columnNumber = 3;
     }
 
-    this.columns = this.splitArray(this.data, this.columnNumber);
+    this.data$.pipe(toArray()).subscribe((data: any) => {
+      this.columns = this.splitArray(data, this.columnNumber);
+    });
   }
 }
