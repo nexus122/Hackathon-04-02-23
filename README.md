@@ -1,5 +1,4 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/nexus122/hackathon-04-02-23/badge)](https://www.codefactor.io/repository/github/nexus122/hackathon-04-02-23)
-# Hackathon-04-02-23
+# Hackathon-04-02-23 Api de unsplash
 
 >Proyecto donde nos conectamos a la api de unsplash y cargamos imagenes en diferentes preguntas.
 Para este proyecto he seleccionado Angular, que es el framework con el que trabajo a diario y me siento mas comodo.
