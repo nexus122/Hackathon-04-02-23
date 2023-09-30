@@ -1,23 +1,23 @@
-# Hackathon-04-02-23 Api de unsplash
+## Hackathon-04-02-23 Api de unsplash
 
 >Proyecto donde nos conectamos a la api de unsplash y cargamos imagenes en diferentes preguntas.
-Para este proyecto he seleccionado Angular, que es el framework con el que trabajo a diario y me siento mas comodo.
-Para empezar he tenido que crearme una cuenta en Unspash para acceder a la api, y firmar las peticiónes con un token.
+	Para este proyecto he seleccionado Angular, que es el framework con el que trabajo a diario y me siento mas comodo.
+	Para empezar he tenido que crearme una cuenta en Unspash para acceder a la api, y firmar las peticiónes con un token.
 
-Despues he recogido esas peticiónes con un fetch, y las he transformado en un observable para poder consumirlas desde el frontend.
+Después he recogido esas peticiones con un fetch, y las he transformado en un observable para poder consumirlas desde el frontend.
 He utilizado dos variables importantes:
 1. **page** => Numero de pagina actual
-2. **per_page** => Numero de imagenes que queremos cargar por pagina
+2. **per_page** => Numero de imágenes que queremos cargar por pagina
 
-Para que el boton pueda cargar mas imagenes he creado un metodo que antes de hacer la llamada modifica el valor de **page** a *page + 1*
+Para que el botón pueda cargar mas imágenes he creado un método que antes de hacer la llamada modifica el valor de **page** a *page + 1*
 De esta manera vuelve a hacer la petición cargando las siguientes **per_page** imagenes
 
-Para que las imagenes se dividan al igual que en figma, obtengo todos los datos y nos divido en un numero x de arrays:
+Para que las imágenes se dividan al igual que en figma, obtengo todos los datos y nos divido en un numero x de arrays:
 1. Si el ancho de la pantalla es PC 1024px - Tiene 3 columnas
 2. Si el ancho de pantalla es Tablet 768px - Tiene 2 columnas 
 3. Si el ancho de pantalla es Movil 425px  - Tiene 1 columna
 
-Se crea un array con distintas array en funcion al numero de columnas, y se dividen los elementos en estas arrays.
+Se crea un array con distintas array en función al numero de columnas, y se dividen los elementos en estas arrays.
 ``` TS
 splitArray(originalArray: Array<any>, parts: number) {
     const arrays = [];
